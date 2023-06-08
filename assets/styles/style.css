@@ -1,0 +1,127 @@
+
+/* Background */
+.bg-grey {
+    background-color: #F8F9FA;
+}
+
+.bg-orange {
+    background-color: #F2913D;
+}
+
+/* Buttons */ 
+.btn-orange {
+    background: #F2913D;
+}
+
+.btn-orange:hover {
+    background-color: #D17B37;
+}
+
+.btn-darkorange {
+    background: #F25C05;
+}
+
+.btn-darkorange:hover {
+    background-color: #D24A03;
+}
+
+.btn-outline-darkorange {
+    border-color: #F25C05;
+}
+
+.btn-outline-darkorange:hover {
+    background-color: #F25C05;
+    color: white;
+}
+
+
+.btn-outline-orange {
+    border-color: #F2913D;
+}
+
+/* Text */
+
+.text-darkorange {
+    color: #F25C05;
+}
+
+.text-orange {
+    color: #F2913D;
+}
+
+.text-oranget {
+    color: #F2B279;
+}
+
+.fs-6 {
+    font-size: 1rem;
+}
+
+.header {
+    height: 2rem;
+}
+
+.card {
+    padding-top: 1rem;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 30rem;
+}
+
+.card-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+}
+
+.profile-picture {
+    width: 50px;
+    height: 50px; 
+    border-radius: 50%; 
+    background-color: #ccc;
+}
+
+.nav-link.active {
+    color: #F25C05 !important;
+} 
+
+.list-group-item.active {
+    background-color: #F25C05;
+    border-color: #F25C05; 
+}
+
+.form-check-input:checked {
+    background-color: #F25C05;
+    border-color: #F25C05; 
+}
+
+.img-thumbnail {
+    width: 6rem;
+}
+
+.card-img-top {
+    width: 8rem;
+}
+
+a {
+    color: #F25C05;
+}
+
+a:hover {
+    color: #993b05;
+}
+
+.list-thumbnail {
+    border-radius: 50%;
+    width: 5rem;  /* Tamaño deseado para la imagen */
+    height: 5rem;
+    overflow: hidden;  /* Para ocultar cualquier parte de la imagen que exceda el tamaño */
+}
+
+.list-thumbnail-image {
+  width: 100%;  /* Establecer el ancho y alto al 100% para que la imagen llene su contenedor */
+  height: 100%;
+  background-size: cover;  /* Redimensionar la imagen para que cubra todo el contenedor */
+  background-position: center;  /* Centrar la imagen dentro del contenedor */
+}
