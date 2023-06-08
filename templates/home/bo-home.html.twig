@@ -1,0 +1,234 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} CEFACT {% endblock %}
+
+{% block body %}
+    <body class="bg-grey">
+    <header class="mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                        <div class="container-fluid">
+                            <a class="navbar-brand me-5" href="">LOGO</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="be-tutor-buscar-empresas.html">Buscar empresas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="be-tutor-mis-alumnos.html">Mis alumnos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="be-tutor-peticiones-recibidas.html">Peticiones</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="be-tutor-ofertas-publicadas.html">Ofertas publicadas</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                    </nav>
+                </div>
+                <div class="col-6 d-flex justify-content-end align-items-center">
+                    <p class="m-0">[Nombre]</p>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            <img src="img/profiles/profile-tutor.jpeg" class="profile-picture" alt="">
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Ajustes de cuenta</a></li>
+                            <li><a class="dropdown-item" href="#">Salir de la sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <img src="img/patternpad(3).svg" alt="">
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container-fluid px-5">
+            <div class="row pt-5 d-flex justify-content-center">
+                <div class="col-6 col-md-3 px-2 px-md-5">
+                    <ul class="list-group">
+                        <div class="d-flex align-items-center ">
+                            <i class="bi bi-funnel-fill fs-3 text-orange"></i>
+                            <p class="fs-2 m-0">Filtrar por</p>
+                        </div>
+                        <li class="list-group-item d-flex" aria-current="true">
+                            <div class="w-50">
+                                <p class="m-0 fs-6 pe-2">Valoración</p>
+                            </div>
+                            <select class="form-select py-0 text-center w-50" aria-label="Default select example">
+                                <option selected>-Ninguna-</option>
+                                <option value="1">1 estrella</option>
+                                <option value="2">2 estrellas</option>
+                                <option value="3">3 estrellas</option>
+                            </select>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center " aria-current="true">
+                            <div class="w-50">
+                                <p class="m-0 fs-6 pe-2">Campo</p>
+                            </div>
+                            <select class="form-select py-0 text-center w-50" aria-label="Default select example">
+                                <option selected>- Ninguna -</option>
+                                <option value="1">Informática</option>
+                                <option value="2">Márketing</option>
+                            </select>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-end " aria-current="true">
+                            <button class="btn btn-outline-darkorange text-darkorange" type="submit">Filtrar</button>
+                        </li>
+                    </ul>
+                    <ul class="list-group">
+                        <div class="d-flex align-items-center ">
+                            <i class="bi bi-sort-down fs-3 text-orange"></i>
+                            <p class="fs-2 m-0">Ordenar de forma</p>
+                        </div>
+                        <li class="list-group-item d-flex" aria-current="true">
+                            <div class="form-check d-flex align-items-center">
+                                <input class="form-check-input me-2" type="radio" name="flexRadioDefault"
+                                       id="flexRadioDefault1">
+                                <label class="form-check-label fs-6" for="flexRadioDefault1">
+                                    Ascendente
+                                </label>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center " aria-current="true">
+                            <div class="form-check d-flex align-items-center">
+                                <input class="form-check-input me-2" type="radio" name="flexRadioDefault"
+                                       id="flexRadioDefault1">
+                                <label class="form-check-label fs-6" for="flexRadioDefault1">
+                                    Descendente
+                                </label>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-end " aria-current="true">
+                            <button class="btn btn-outline-darkorange text-darkorange" type="submit">Ordenar</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-9">
+                    <div class="row pt-5 d-flex">
+                        <form class="d-flex w-50 align-items-center">
+                            <i class="bi bi-search fs-3 me-1 text-darkorange"></i>
+                            <input class="form-control" type="search" placeholder="Buscar" aria-label="Buscar">
+                            <button class="btn btn-outline-darkorange ms-1" type="submit">Buscar</button>
+                        </form>
+                    </div>
+                    <div class="row mt-5 gy-4">
+                        <div class="col d-flex justify-content-center">
+                            <div class="card">
+                                <div class="row align-items-center mb-3 ps-3">
+                                    <div class="col-4 text-center">
+                                        <img src="img/imagen-empresa.jpg" class="card-img" alt="">
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="row">
+                                            <div class="col-12 d-flex-column align-items-center justify-content-around">
+                                                <p class="m-0 fs-4">Ingeniero de sistemas</p>
+                                                <p class="m-0 fs-5 text-orange"><a href="#">Empresa inventada S.L</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center mb-2 ps-3">
+                                    <div class="col-2 text-center">
+                                        <i class="bi bi-geo-alt fs-3 text-darkorange"></i>
+                                    </div>
+                                    <div class="col-10">
+                                        <p class="text-grey m-0 fs-5">Mallorca, España</p>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center ps-3">
+                                    <div class="col-2 text-center">
+                                        <i class="bi bi-clock fs-3 text-darkorange"></i>
+                                    </div>
+                                    <div class="col-4">
+                                        <p class="m-0">Hace 16 min.</p>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <i class="bi bi-person fs-3 text-darkorange"></i>
+                                    </div>
+                                    <div class="col-4">
+                                        <p class="m-0">1 vacante</p>
+                                    </div>
+                                </div>
+                                <div class="row py-2">
+                                    <div class="col-6 text-center">
+                                        <a class="pe-2 fs-5" href="">Ver más</a>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <a class="btn btn-orange text-white w-75" href="#" role="button">Realizar
+                                            petición</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col d-flex justify-content-center">
+                            <div class="card">
+                                <div class="row align-items-center mb-3 ps-3">
+                                    <div class="col-4 text-center">
+                                        <img src="img/imagen-empresa.jpg" class="card-img" alt="">
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="row">
+                                            <div class="col-12 d-flex-column align-items-center justify-content-around">
+                                                <p class="m-0 fs-4">Ingeniero de sistemas</p>
+                                                <p class="m-0 fs-5 text-orange"><a href="#">Empresa inventada S.L</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center mb-2 ps-3">
+                                    <div class="col-2 text-center">
+                                        <i class="bi bi-geo-alt fs-3 text-darkorange"></i>
+                                    </div>
+                                    <div class="col-10">
+                                        <p class="text-grey m-0 fs-5">Mallorca, España</p>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center ps-3">
+                                    <div class="col-2 text-center">
+                                        <i class="bi bi-clock fs-3 text-darkorange"></i>
+                                    </div>
+                                    <div class="col-4">
+                                        <p class="m-0">Hace 16 min.</p>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <i class="bi bi-person fs-3 text-darkorange"></i>
+                                    </div>
+                                    <div class="col-4">
+                                        <p class="m-0">1 vacante</p>
+                                    </div>
+                                </div>
+                                <div class="row py-2">
+                                    <div class="col-6 text-center">
+                                        <a class="pe-2 fs-5" href="">Ver más</a>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <a class="btn btn-orange text-white w-75" href="#" role="button">Realizar
+                                            petición</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    </body>
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,8 +18,13 @@ class DefaultController extends AbstractController
     #[Route('/home', name: 'home', priority:1)]
     public function home(): Response
     {
-        return $this->render('home/home.html.twig', [
-            'controller_name' => 'DefaultController',
-        ]);
+        if ($this->isGranted('ROLE_TUTOR')) {
+
+            return $this->render('home/bo-home.html.twig');
+        }
+            return $this->render('home/fe-home.html.twig', [
+                'controller_name' => 'DefaultController',
+            ]);
+
     }
 }

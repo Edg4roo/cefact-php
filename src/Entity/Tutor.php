@@ -6,9 +6,14 @@ use App\Repository\TutorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: TutorRepository::class)]
-class Tutor
+#[UniqueEntity(fields: ['email'], message: 'No puedes registrarte con esa cuenta de correo electrónico')]
+class Tutor implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -36,6 +41,12 @@ class Tutor
 
     #[ORM\OneToMany(mappedBy: 'tutor', targetEntity: Training::class)]
     private Collection $trainings;
+
+    #[ORM\Column(length: 255)]
+    private ?string $password = null;
+
+    #[ORM\Column(type: 'json')]
+    private array $roles = [];
 
     public function __construct()
     {
@@ -174,4 +185,57 @@ class Tutor
 
         return $this;
     }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_TUTOR';
+
+        return array_unique($roles);
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->getEmail();
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function serialize()
+    {
+        return serialize([
+            $this->getId(),
+            $this->getEmail(),
+            $this->getPassword()
+        ]);
+    }
+
+    /**
+     * @param string $data
+     * @return void
+     */
+    public function unserialize(string $data)
+    {
+        list($this->id, $this->email, $this->password) =
+            unserialize($data, ['allowed_classes' => false]);
+    }
+
 }
