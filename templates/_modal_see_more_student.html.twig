@@ -1,0 +1,26 @@
+<div class="modal fade" data-modal-form-target="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Detalles de <span class="text-darkorange">{{ student.name }}</span></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-start">
+                <div class="text-center my-5">
+                    {% if student.thumbnail %}
+                        <img src="/uploads/images/thumbnails/students/{{ student.thumbnail }}" class="card-img-top" alt="retrato de estudiante">
+                    {% else %}
+                        <img src="/build/images/default_user.png" class="card-img-top" alt="imagen por defecto">
+                    {% endif %}
+                </div>
+                <p><strong>Nombre:</strong> {{ student.name }}</p>
+                <p><strong>Email:</strong> {{ student.email }}</p>
+                <p><strong>NIA:</strong> {{ student.nia }}</p>
+                <p><strong>Teléfono:</strong> {{ student.phone }}</p>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} CEFACT {% endblock %}
+
+{% block body %}
+    <body class="bg-grey">
+    {% include '_header.html.twig' %}
+    <main>
+        <div class="container-fluid px-5">
+            <div class="row pt-5 d-flex justify-content-center">
+                <div class="col-6 col-md-3 px-2 px-md-5">
+                    <ul class="list-group">
+                        <div class="d-flex align-items-center ">
+                            <i class="bi bi-funnel-fill fs-3 text-orange"></i>
+                            <p class="fs-2 m-0">Filtrar por</p>
+                        </div>
+                        <li class="list-group-item d-flex" aria-current="true">
+                            <div class="w-50">
+                                <p class="m-0 fs-6 pe-2">Valoración</p>
+                            </div>
+                            <select class="form-select py-0 text-center w-50" aria-label="Default select example">
+                                <option selected>-Ninguna-</option>
+                                <option value="1">1 estrella</option>
+                                <option value="2">2 estrellas</option>
+                                <option value="3">3 estrellas</option>
+                            </select>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center " aria-current="true">
+                            <div class="w-50">
+                                <p class="m-0 fs-6 pe-2">Campo</p>
+                            </div>
+                            <select class="form-select py-0 text-center w-50" aria-label="Default select example">
+                                <option selected>- Ninguna -</option>
+                                <option value="1">Informática</option>
+                                <option value="2">Márketing</option>
+                            </select>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-end " aria-current="true">
+                            <button class="btn btn-outline-darkorange text-darkorange" type="submit">Filtrar</button>
+                        </li>
+                    </ul>
+                    <ul class="list-group">
+                        <div class="d-flex align-items-center ">
+                            <i class="bi bi-sort-down fs-3 text-orange"></i>
+                            <p class="fs-2 m-0">Ordenar de forma</p>
+                        </div>
+                        <li class="list-group-item d-flex" aria-current="true">
+                            <div class="form-check d-flex align-items-center">
+                                <input class="form-check-input me-2" type="radio" name="flexRadioDefault"
+                                       id="flexRadioDefault1">
+                                <label class="form-check-label fs-6" for="flexRadioDefault1">
+                                    Ascendente
+                                </label>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center " aria-current="true">
+                            <div class="form-check d-flex align-items-center">
+                                <input class="form-check-input me-2" type="radio" name="flexRadioDefault"
+                                       id="flexRadioDefault1">
+                                <label class="form-check-label fs-6" for="flexRadioDefault1">
+                                    Descendente
+                                </label>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-end " aria-current="true">
+                            <button class="btn btn-outline-darkorange text-darkorange" type="submit">Ordenar</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-9">
+                    <div class="row pt-5 d-flex">
+                        <form class="d-flex w-50 align-items-center">
+                            <i class="bi bi-search fs-3 me-1 text-darkorange"></i>
+                            <input class="form-control" type="search" placeholder="Buscar" aria-label="Buscar">
+                            <button class="btn btn-outline-darkorange ms-1" type="submit">Buscar</button>
+                        </form>
+                    </div>
+                    <div class="row mt-5 gy-4">
+                        {% for trainingOffer in trainingOffers %}
+                            <div class="col d-flex justify-content-center">
+                                <div class="card">
+                                    <div class="row align-items-center mb-3 ps-3">
+                                        <div class="col-4 text-center">
+                                            {% if trainingOffer.company.thumbnail %}
+                                                <img src="/uploads/images/thumbnails/companies/{{ trainingOffer.company.thumbnail }}" class="card-img-top" alt="retrato de estudiante">
+                                            {% else %}
+                                                <img src="/build/images/default_company.png" class="card-img-top" alt="imagen por defecto">
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="row">
+                                                <div class="col-12 d-flex-column align-items-center justify-content-around">
+                                                    <p class="m-0 fs-4">{{ trainingOffer.course.name }}</p>
+                                                    <p class="m-0 fs-5 text-orange"><a href="#">{{ trainingOffer.company.name }}</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center mb-2 ps-3">
+                                        <div class="col-2 text-center">
+                                            <i class="bi bi-geo-alt fs-3 text-darkorange"></i>
+                                        </div>
+                                        <div class="col-10">
+                                            <p class="text-grey m-0 fs-5">{{ trainingOffer.company.city }}, {{ trainingOffer.company.province }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center ps-3">
+                                        <div class="col-2 text-center">
+                                            <i class="bi bi-clock fs-3 text-darkorange"></i>
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="m-0">{{ trainingOffer.createdAt|date('Y-m-d H:i') }}</p>
+                                        </div>
+                                        <div class="col-2 text-center">
+                                            <i class="bi bi-person fs-3 text-darkorange"></i>
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="m-0">1 vacante</p>
+                                        </div>
+                                    </div>
+                                    <div class="row py-2">
+                                        <div class="col-6 text-center">
+                                            <a class="pe-2 fs-5" href="">Ver más</a>
+                                        </div>
+                                        <div class="col-6 text-center">
+                                            <a class="btn btn-orange text-white w-75" href="#" role="button">Realizar
+                                                petición</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    </body>
+{% endblock %}

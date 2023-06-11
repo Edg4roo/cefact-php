@@ -6,8 +6,13 @@ use App\Repository\StudentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
+
+#[Vich\Uploadable]
 class Student
 {
     #[ORM\Id]
@@ -27,6 +32,9 @@ class Student
     #[ORM\Column(length: 8)]
     private ?string $nia = null;
 
+    #[Vich\UploadableField(mapping: 'students', fileNameProperty: 'thumbnail')]
+    private ?File $imageFile = null;
+
     #[ORM\ManyToMany(targetEntity: Tutor::class, mappedBy: 'students')]
     private Collection $tutors;
 
@@ -41,6 +49,34 @@ class Student
 
     #[ORM\OneToMany(mappedBy: 'student', targetEntity: Request::class)]
     private Collection $requests;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updated_at = null;
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     */
+    public function setImageFile(?File $imageFile): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $thumbnail = null;
 
     public function __construct()
     {
@@ -241,6 +277,30 @@ class Student
                 $request->setStudent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getThumbnail(): ?string
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?string $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
 
         return $this;
     }

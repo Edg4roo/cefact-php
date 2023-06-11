@@ -19,8 +19,7 @@ class DefaultController extends AbstractController
     public function home(): Response
     {
         if ($this->isGranted('ROLE_TUTOR')) {
-
-            return $this->render('home/bo-home.html.twig');
+            return $this->redirectToRoute("app_tutor_search_companies");
         }
             return $this->render('home/fe-home.html.twig', [
                 'controller_name' => 'DefaultController',

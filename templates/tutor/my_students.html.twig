@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mis alumnos{% endblock %}
+
+{% block body %}
+    {% include '_header.html.twig' %}
+<body class="bg-grey">
+<main>
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-6 d-flex align-items-center">
+                <h2 class="m-0">Tienes un total de <span class="text-darkorange">{{ students|length }}</span> alumnos</h2>
+            </div>
+            <div class="col-6 text-end" {{ stimulus_controller('modal-form') }}>
+                <a data-action="modal-form#openModal" href="#" class="btn btn-darkorange text-white fs-5">
+                    <i class="bi bi-person-add pe-2"></i>Añadir alumno
+                </a>
+                {{ include('_modal_new_student.html.twig') }}
+            </div>
+        </div>
+        <div class="row pt-5 gy-3">
+            {% for student in students %}
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <div class="d-flex justify-content-center">
+                            {% if student.thumbnail %}
+                                <img src="/uploads/images/thumbnails/students/{{ student.thumbnail }}" class="card-img-top" alt="retrato de estudiante">
+                            {% else %}
+                                <img src="/build/images/default_user.png" class="card-img-top" alt="imagen por defecto">
+                            {% endif %}
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-center">{{ student.name }}</h5>
+                            <div class="text-center" {{ stimulus_controller('modal-form') }}>
+                                <a data-action="modal-form#openModal" href="#" class="btn btn-orange text-white" data-bs-toggle="modal" data-bs-target="#seeMoreStudentModal">
+                                    Ver más
+                                </a>
+                                {{ include('_modal_see_more_student.html.twig') }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+

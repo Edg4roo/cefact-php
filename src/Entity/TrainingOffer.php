@@ -26,6 +26,9 @@ class TrainingOffer
     #[ORM\OneToMany(mappedBy: 'training_offer', targetEntity: Request::class)]
     private Collection $request;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $created_at = null;
+
     public function __construct()
     {
         $this->request = new ArrayCollection();
@@ -86,6 +89,18 @@ class TrainingOffer
                 $request->setTrainingOffer(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    {
+        $this->created_at = $created_at;
 
         return $this;
     }

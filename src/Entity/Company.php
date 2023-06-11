@@ -6,6 +6,9 @@ use App\Repository\CompanyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 class Company
@@ -39,6 +42,42 @@ class Company
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: Request::class)]
     private Collection $requests;
 
+    #[ORM\Column(length: 50)]
+    private ?string $autonomie = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $province = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $city = null;
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     */
+    public function setImageFile(?File $imageFile): void
+    {
+        $this->imageFile = $imageFile;
+    }
+
+    #[ORM\Column(length: 5)]
+    private ?string $CP = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $thumbnail = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updated_at = null;
+
+    #[Vich\UploadableField(mapping: 'companies', fileNameProperty: 'thumbnail')]
+    private ?File $imageFile = null;
 
     public function __construct()
     {
@@ -217,6 +256,78 @@ class Company
                 $request->setCompany(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAutonomie(): ?string
+    {
+        return $this->autonomie;
+    }
+
+    public function setAutonomie(string $autonomie): self
+    {
+        $this->autonomie = $autonomie;
+
+        return $this;
+    }
+
+    public function getProvince(): ?string
+    {
+        return $this->province;
+    }
+
+    public function setProvince(string $province): self
+    {
+        $this->province = $province;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCP(): ?string
+    {
+        return $this->CP;
+    }
+
+    public function setCP(string $CP): self
+    {
+        $this->CP = $CP;
+
+        return $this;
+    }
+
+    public function getThumbnail(): ?string
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?string $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
+    {
+        $this->updated_at = $updated_at;
 
         return $this;
     }

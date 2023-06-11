@@ -8,8 +8,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: TutorRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'No puedes registrarte con esa cuenta de correo electrónico')]
@@ -47,6 +49,15 @@ class Tutor implements UserInterface, PasswordAuthenticatedUserInterface, \Seria
 
     #[ORM\Column(type: 'json')]
     private array $roles = [];
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updated_at = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $profile = null;
+
+    #[Vich\UploadableField(mapping: 'tutors', fileNameProperty: 'profile')]
+    private ?File $imageFile = null;
 
     public function __construct()
     {
@@ -236,6 +247,30 @@ class Tutor implements UserInterface, PasswordAuthenticatedUserInterface, \Seria
     {
         list($this->id, $this->email, $this->password) =
             unserialize($data, ['allowed_classes' => false]);
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getProfile(): ?string
+    {
+        return $this->profile;
+    }
+
+    public function setProfile(?string $profile): self
+    {
+        $this->profile = $profile;
+
+        return $this;
     }
 
 }

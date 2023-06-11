@@ -1,0 +1,23 @@
+<div class="modal fade" data-modal-form-target="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo alumno</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-start">
+                {{ form_start(studentForm) }}
+                {{ form_row(studentForm.name) }}
+                {{ form_row(studentForm.email) }}
+                {{ form_row(studentForm.phone) }}
+                {{ form_row(studentForm.nia) }}
+                {{ form_row(studentForm.imageFile) }}
+                <div class="text-center"> <button type="submit" class="btn btn-darkorange text-white w-50 mt-5">Register</button> </div>
+                {{ form_end(studentForm) }}
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
