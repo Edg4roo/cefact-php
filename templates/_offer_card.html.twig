@@ -1,0 +1,53 @@
+<div class="col d-flex justify-content-center">
+    <div class="card">
+        <div class="row align-items-center mb-3 ps-3">
+            <div class="col-4 text-center">
+                {% if trainingOffer.company.thumbnail %}
+                    <img src="/uploads/images/thumbnails/companies/{{ trainingOffer.company.thumbnail }}" class="card-img-top" alt="retrato de estudiante">
+                {% else %}
+                    <img src="/build/images/default_company.png" class="card-img-top" alt="imagen por defecto">
+                {% endif %}
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-12 d-flex-column align-items-center justify-content-around">
+                        <p class="m-0 fs-4">{{ trainingOffer.course.name }}</p>
+                        <p class="m-0 fs-5 text-orange"><a href="#">{{ trainingOffer.company.name }}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center mb-2 ps-3">
+            <div class="col-2 text-center">
+                <i class="bi bi-geo-alt fs-3 text-darkorange"></i>
+            </div>
+            <div class="col-10">
+                <p class="text-grey m-0 fs-5">{{ trainingOffer.company.city }}, {{ trainingOffer.company.province }}</p>
+            </div>
+        </div>
+        <div class="row align-items-center ps-3">
+            <div class="col-2 text-center">
+                <i class="bi bi-clock fs-3 text-darkorange"></i>
+            </div>
+            <div class="col-4">
+                <p class="m-0">{{ trainingOffer.createdAt|date('Y-m-d H:i') }}</p>
+            </div>
+            <div class="col-2 text-center">
+                <i class="bi bi-person fs-3 text-darkorange"></i>
+            </div>
+            <div class="col-4">
+                <p class="m-0">1 vacante</p>
+            </div>
+        </div>
+        <div class="row py-2">
+            <div class="col-6 text-center">
+                <a class="pe-2 fs-5" href="">Ver más</a>
+            </div>
+            <div class="col-6 text-center">
+                <a class="btn btn-orange text-white w-75" href="#" role="button">Realizar
+                    petición</a>
+            </div>
+        </div>
+    </div>
+</div>

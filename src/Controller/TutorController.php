@@ -81,4 +81,34 @@ class TutorController extends AbstractController
         ]);
     }
 
+    #[Route('/request/sended', name: 'app_tutor_request_sended')]
+    public function showRequestSended(Request $request, StudentRepository $studentRepository): Response
+    {
+        $tutor = $this->getUser();
+        $students = $tutor->getStudents();
+        $sended_requests = [];
+
+        foreach ($students as $student) {
+            $requests = $student->getRequests();
+
+            if (!$requests->isEmpty()) {
+                foreach ($requests as $request) {
+                    $sended_requests[] = $request;
+                }
+            }
+        }
+
+        return $this->render('tutor/request_sended.html.twig', [
+            'sendedRequests' => $sended_requests
+        ]);
+    }
+
+    #[Route('/request/received', name: 'app_tutor_request_received')]
+    public function showRequestReceived(Request $request, StudentRepository $studentRepository): Response
+    {
+        return $this->render('tutor/request_received.html.twig', [
+        ]);
+    }
+
+
 }

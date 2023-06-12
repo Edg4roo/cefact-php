@@ -53,6 +53,9 @@ class Student
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updated_at = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $thumbnail = null;
+
     /**
      * @return File|null
      */
@@ -75,8 +78,7 @@ class Student
         }
     }
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $thumbnail = null;
+
 
     public function __construct()
     {

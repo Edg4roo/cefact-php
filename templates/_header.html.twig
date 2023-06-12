@@ -19,7 +19,7 @@
                                     <a class="nav-link  {% if app.request.pathInfo == path('app_tutor_my_students') %}active{% endif %}" href="{{ path('app_tutor_my_students') }}">Mis alumnos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="be-tutor-peticiones-recibidas.html">Peticiones</a>
+                                    <a class="nav-link {% if app.request.pathInfo == path('app_tutor_request_received') or app.request.pathInfo == path('app_tutor_request_sended') %}active{% endif %}" href="{{ path('app_tutor_request_received') }}">Peticiones</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="be-tutor-ofertas-publicadas.html">Ofertas publicadas</a>

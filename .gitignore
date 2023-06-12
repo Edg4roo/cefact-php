@@ -18,3 +18,7 @@ yarn-error.log
 
 ###> Imágenes que los usuarios pueden subir ###
 /uploads/
+
+###> Directorio generado por phpStorm ###
+.idea
+

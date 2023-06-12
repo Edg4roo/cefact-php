@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Company;
 use App\Entity\CompanyRepresentative;
 use App\Entity\Course;
+use App\Entity\Request;
 use App\Entity\Student;
 use App\Entity\StudyCenter;
 use App\Entity\TrainingOffer;
@@ -193,14 +194,33 @@ class AppFixtures extends Fixture
         }
 
         // 10 ofertas de formación
+        $training_offers_to_use = [];
         for ($i = 0; $i<10;$i++) {
             $training_offer = new TrainingOffer();
             $training_offer->setCompany($companies_to_use[array_rand($companies_to_use)]);
             $training_offer->setCourse($courses_to_use[array_rand($courses_to_use)]);
             $training_offer->setCreatedAt(new \DateTimeImmutable('now'));
+            $training_offers_to_use[] = $training_offer;
             $manager->persist($training_offer);
         }
 
+
+        // 2 peticiones a alumnos del tutor David
+        $alumnos = $tutor_david->getStudents();
+
+        for ($i=0; $i<5; $i++) {
+            $request = new Request();
+            $request->setStudent($alumnos[$i]);
+            $request->setTrainingOffer($training_offers_to_use[$i]);
+            $request->setCreatedAt(new \DateTimeImmutable('now'));
+            $request->setStatus('undefined');
+            $manager->persist($request);
+        }
+
         $manager->flush();
+
+
     }
+
+
 }

@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Peticiones{% endblock %}
+
+{% block body %}
+    <body class="bg-grey">
+    {% include '_header.html.twig' %}
+
+    <main>
+        <div class="container pt-5">
+            <div class="row pt-5">
+                <div class="col-3 pt-3">
+                    <div class="list-group">
+                        <a href="{{ path('app_tutor_request_received') }}"
+                           class="list-group-item list-group-item-action"><i
+                                    class="bi bi-inbox pe-4"></i>Peticiones recibidas
+                        </a>
+                        <a href="{{ path('app_tutor_request_sended') }}"
+                           class="list-group-item list-group-item-action active"
+                           aria-current="true">
+                            <i class="bi bi-send pe-4"></i>Peticiones enviadas
+                        </a>
+                    </div>
+                </div>
+                <div class="col-9">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Alumno</th>
+                            <th scope="col">Empresa</th>
+                            <th scope="col">Fecha de envío</th>
+                            <th scope="col">Estado</th>
+                        </tr>
+                        </thead>
+                        <tbody class="align-middle">
+                        {% for sendedRequest in sendedRequests %}
+                            <th scope="row">
+                                <div class="list-thumbnail">
+                                    <div class="list-thumbnail-image"
+                                    {% if sendedRequest.student.thumbnail %}
+                                         style="background-image: url('/uploads/images/thumbnails/students/{{ sendedRequest.student.thumbnail }}');"
+                                    {% else %}
+                                         style="background-image: url('/build/images/thumbnails/students/default.png')";
+                                    {% endif %}
+                                    >
+                                    </div>
+                                </div>
+                            </th>
+                            <td><a href="">{{ sendedRequest.student.name }}</a></td>
+                            <td>{{ sendedRequest.trainingOffer.company.name }}</td>
+                            <td>{{ sendedRequest.createdAt | date ('Y-m-d h:i') }}</td>
+                            {% if sendedRequest.status == 'accepted' %}
+                                <td><i class="bi bi-check-circle-fill text-success pe-2"></i>Aceptada</td>
+                            {% elseif sendedRequest.status == 'denied' %}
+                                <td><i class="bi bi-x-circle-fill text-danger pe-2"></i>Denegada</td>
+                            {% elseif sendedRequest.status == 'undefined' %}
+                                <td><i class="bi bi-stop-circle text-warning pe-2"></i>Pendiente</td>
+                            {% endif %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    </body>
+{% endblock %}

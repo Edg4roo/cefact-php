@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\TrainingOfferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,13 +17,14 @@ class DefaultController extends AbstractController
     }
 
     #[Route('/home', name: 'home', priority:1)]
-    public function home(): Response
+    public function home(TrainingOfferRepository $trainingOfferRepository): Response
     {
+        $trainingOffers = $trainingOfferRepository->findAll();
         if ($this->isGranted('ROLE_TUTOR')) {
             return $this->redirectToRoute("app_tutor_search_companies");
         }
-            return $this->render('home/fe-home.html.twig', [
-                'controller_name' => 'DefaultController',
+            return $this->render('home/fe-home.html.twig',[
+                'trainingOffers' => $trainingOffers
             ]);
 
     }
