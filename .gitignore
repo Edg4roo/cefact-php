@@ -17,8 +17,8 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
 ###> Imágenes que los usuarios pueden subir ###
-/public/uploads/*.jpg
-/public/uploads/*.png
+/public/uploads/**/*.png
+/public/uploads/**/*.jpg
 
 ###> Directorio generado por phpStorm ###
 .idea
