@@ -32,57 +32,39 @@
                         </tr>
                         </thead>
                         <tbody class="align-middle">
-                        <tr>
-                            <th scope="row">
-                                <div class="list-thumbnail">
-                                    <div class="list-thumbnail-image"
-                                         style="background-image: url('img/imagen-empresa.jpg');"></div>
-                                </div>
-                            </th>
-                            <td><a href="">Empresa Inventada 1 S.L</a></td>
-                            <td>Marcos Quintero</td>
-                            <td>XX/XX/XXXX 00:00</td>
-                            <td>
-                                <button type="button" class="btn btn-success" title="Aceptar"><i
-                                            class="bi bi-check2"></i></button>
-                                <button type="button" class="btn btn-danger" title="Denegar"><i
-                                            class="bi bi-x-lg"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <div class="list-thumbnail">
-                                    <div class="list-thumbnail-image"
-                                         style="background-image: url('img/imagen-empresa.jpg');"></div>
-                                </div>
-                            </th>
-                            <td><a href="">Empresa Inventada 2 S.L</a></td>
-                            <td>María Prieto</td>
-                            <td>XX/XX/XXXX 00:00</td>
-                            <td>
-                                <button type="button" class="btn btn-success" title="Aceptar"><i
-                                            class="bi bi-check2"></i></button>
-                                <button type="button" class="btn btn-danger" title="Denegar"><i
-                                            class="bi bi-x-lg"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <div class="list-thumbnail">
-                                    <div class="list-thumbnail-image"
-                                         style="background-image: url('img/imagen-empresa.jpg');"></div>
-                                </div>
-                            </th>
-                            <td><a href="">Empresa Inventada 3 S.L</a></td>
-                            <td>Petra Gómez</td>
-                            <td>XX/XX/XXXX 00:00</td>
-                            <td>
-                                <button type="button" class="btn btn-success" title="Aceptar"><i
-                                            class="bi bi-check2"></i></button>
-                                <button type="button" class="btn btn-danger" title="Denegar"><i
-                                            class="bi bi-x-lg"></i></button>
-                            </td>
-                        </tr>
+                        {% for receivedRequest in receivedRequests %}
+                            <tr>
+                                <th scope="row">
+                                    <div class="list-thumbnail">
+                                        <div class="list-thumbnail-image"
+                                                {% if receivedRequest.studentOffer.student.thumbnail %}
+                                                    style="background-image: url('/uploads/images/thumbnails/students/{{ receivedRequest.studentOffer.student.name }}');"
+                                                {% else %}
+                                                    style="background-image: url('/assets/images/thumbnails/students/default.png')";
+                                                {% endif %}
+                                        >
+                                        </div>
+                                    </div>
+                                    <div class="list-thumbnail">
+                                        <div class="list-thumbnail-image"
+                                             style="background-image: url('img/thumbnails/alu1.jpeg');"></div>
+                                    </div>
+                                </th>
+                                <td><a href="">{{ receivedRequest.company.name  }}</a></td>
+                                <td>{{ receivedRequest.studentOffer.student.name  }}</td>
+                                <td>{{ receivedRequest.createdAt | date ('Y-m-d h:i') }}</td>
+                                {% if receivedRequest.status == 'accepted' %}
+                                    <td><i class="bi bi-check-circle-fill text-success pe-2"></i>Aceptada</td>
+                                {% elseif receivedRequest.status == 'denied' %}
+                                    <td><i class="bi bi-x-circle-fill text-danger pe-2"></i>Denegada</td>
+                                {% elseif receivedRequest.status == 'undefined' %}
+                                    <td>
+                                        <a href="{{ path('app_request_accept', {'id': receivedRequest.id, 'student':receivedRequest.studentOffer.student}) }}" class="btn btn-success" title="Aceptar"><i class="bi bi-check2"></i></a>
+                                        <a href="" class="btn btn-danger" title="Denegar"><i class="bi bi-x-lg"></i></a>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>

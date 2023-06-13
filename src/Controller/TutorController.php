@@ -106,7 +106,26 @@ class TutorController extends AbstractController
     #[Route('/request/received', name: 'app_tutor_request_received')]
     public function showRequestReceived(Request $request, StudentRepository $studentRepository): Response
     {
+        $tutor = $this->getUser();
+        $students = $tutor->getStudents();
+        $received_requests = [];
+
+        foreach ($students as $student) {
+            $offers = $student->getOffers();
+
+            foreach ($offers as $offer) {
+                $requests = $offer->getRequest();
+
+                if (!$requests->isEmpty()) {
+                    foreach ($requests as $request) {
+                        $received_requests[] = $request;
+                    }
+                }
+            }
+        }
+
         return $this->render('tutor/request_received.html.twig', [
+            'receivedRequests' => $received_requests
         ]);
     }
 
