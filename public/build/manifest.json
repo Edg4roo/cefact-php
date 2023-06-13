@@ -1,15 +1,16 @@
 {
-  "build/app.css": "/build/app.a6067dba.css",
+  "build/app.css": "/build/app.7678f448.css",
   "build/app.js": "/build/app.c21b2462.js",
   "build/runtime.js": "/build/runtime.188fa053.js",
   "build/372.d05df221.css": "/build/372.d05df221.css",
   "build/372.ba130d94.js": "/build/372.ba130d94.js",
-  "build/images/profiles/profile-tutor.jpeg": "/build/images/profiles/profile-tutor.jpeg",
   "build/fonts/bootstrap-icons.woff?": "/build/fonts/bootstrap-icons.4753c5ba.woff",
   "build/fonts/bootstrap-icons.woff2?": "/build/fonts/bootstrap-icons.6d63d050.woff2",
   "build/images/home1.png": "/build/images/home1.png",
   "build/images/imagen-empresa.jpg": "/build/images/imagen-empresa.jpg",
   "build/images/thumbnails/students/default.png": "/build/images/thumbnails/students/default.png",
+  "build/images/logo_white.png": "/build/images/logo_white.png",
   "build/images/Logo1.svg": "/build/images/Logo1.svg",
-  "build/images/patternpad_header.svg": "/build/images/patternpad_header.svg"
+  "build/images/patternpad_header.svg": "/build/images/patternpad_header.svg",
+  "build/images/logo.png": "/build/images/logo.png"
 }

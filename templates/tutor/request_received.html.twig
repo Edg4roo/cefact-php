@@ -38,16 +38,12 @@
                                     <div class="list-thumbnail">
                                         <div class="list-thumbnail-image"
                                                 {% if receivedRequest.studentOffer.student.thumbnail %}
-                                                    style="background-image: url('/uploads/images/thumbnails/students/{{ receivedRequest.studentOffer.student.name }}');"
+                                                    style="background-image: url('/uploads/images/thumbnails/students/{{ receivedRequest.studentOffer.student.thumbnail }}');"
                                                 {% else %}
                                                     style="background-image: url('/assets/images/thumbnails/students/default.png')";
                                                 {% endif %}
                                         >
                                         </div>
-                                    </div>
-                                    <div class="list-thumbnail">
-                                        <div class="list-thumbnail-image"
-                                             style="background-image: url('img/thumbnails/alu1.jpeg');"></div>
                                     </div>
                                 </th>
                                 <td><a href="">{{ receivedRequest.company.name  }}</a></td>
@@ -60,7 +56,7 @@
                                 {% elseif receivedRequest.status == 'undefined' %}
                                     <td>
                                         <a href="{{ path('app_request_accept', {'id': receivedRequest.id, 'student':receivedRequest.studentOffer.student}) }}" class="btn btn-success" title="Aceptar"><i class="bi bi-check2"></i></a>
-                                        <a href="" class="btn btn-danger" title="Denegar"><i class="bi bi-x-lg"></i></a>
+                                        <a href="{{ path('app_request_deny', {'id': receivedRequest.id}) }}" class="btn btn-danger" title="Denegar"><i class="bi bi-x-lg"></i></a>
                                     </td>
                                 {% endif %}
                             </tr>

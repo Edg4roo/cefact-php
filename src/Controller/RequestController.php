@@ -18,15 +18,10 @@ class RequestController extends AbstractController
     {
         $request = $requestRepository->find($id);
 
-        // Verificar que la solicitud existe
         if (!$request) {
             throw $this->createNotFoundException('La solicitud no existe.');
         }
 
-        // Realizar acciones de aceptación
-        // ...
-
-        // Crear una nueva entidad Training
         $training = new Training();
         $company_representative = $request->getCompany()->getCompanyRepresentatives();
         $training->setCompanyRepresentative($company_representative[0]);
@@ -35,38 +30,28 @@ class RequestController extends AbstractController
         $training->setCompany($request->getCompany());
         $training->setStartDate(new \DateTime());
 
-        // Guardar la entidad Training en la base de datos
         $entityManager->persist($training);
         $entityManager->flush();
 
-        // Eliminar la solicitud aceptada
         $request->setStatus('accepted');
 
-        // Guardar los cambios en la base de datos
         $entityManager->flush();
 
-        // Redireccionar a la página de éxito
         return $this->redirectToRoute('app_tutor_request_received');
     }
 
-    /*#[Route('/deny/{id}', name: 'app_tutor_deny_offer')]
-    public function denyOffer(Request $request, EntityManagerInterface $entityManager, RequestRepository $requestRepository): Response
+    #[Route('/deny/{id}', name: 'app_request_deny')]
+    public function denyOffer(Request $request, EntityManagerInterface $entityManager, RequestRepository $requestRepository, $id): Response
     {
         $request = $requestRepository->find($id);
 
-        // Verificar que la solicitud existe
         if (!$request) {
             throw $this->createNotFoundException('La solicitud no existe.');
         }
 
-        // Realizar acciones de denegación
-        // ...
-
-        // Eliminar la solicitud denegada
-        $entityManager->remove($request);
+        $request->setStatus('denied');
         $entityManager->flush();
 
-        // Redireccionar a la página de éxito
-        return $this->redirectToRoute('app_tutor_success');
-    }*/
+        return $this->redirectToRoute('app_tutor_request_received');
+    }
 }

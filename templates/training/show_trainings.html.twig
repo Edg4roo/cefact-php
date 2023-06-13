@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Peticiones{% endblock %}
+
+{% block body %}
+    <body class="bg-grey">
+    {% include '_header.html.twig' %}
+    <main>
+        <div class="container pt-5">
+            <div class="row pt-5">
+                <div class="col-3 pt-3">
+                    <div class="list-group">
+                        <a href="{{ path('app_tutor_request_received') }}"
+                           class="list-group-item list-group-item-action active"><i
+                                    class="bi bi-inbox pe-4"></i>Peticiones recibidas
+                        </a>
+                        <a href="{{ path('app_tutor_request_sended') }}" class="list-group-item list-group-item-action"
+                           aria-current="true">
+                            <i class="bi bi-send pe-4"></i>Peticiones enviadas
+                        </a>
+                    </div>
+                </div>
+                <div class="col-9">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Empresa</th>
+                            <th scope="col">Alumno</th>
+                            <th scope="col">Fecha de comienzo</th>
+                        </tr>
+                        </thead>
+                        <tbody class="align-middle">
+                        {% for training in trainings %}
+                            <tr>
+                                <th scope="row">
+                                    <div class="list-thumbnail">
+                                        <div class="list-thumbnail-image"
+                                                {% if training.student.thumbnail %}
+                                                    style="background-image: url('/uploads/images/thumbnails/students/{{ training.student.thumbnail }}');"
+                                                {% else %}
+                                                    style="background-image: url('/assets/images/thumbnails/students/default.png')";
+                                                {% endif %}
+                                        >
+                                        </div>
+                                    </div>
+                                </th>
+                                <td><a href="">{{ training.company.name  }}</a></td>
+                                <td>{{ training.student.name  }}</td>
+                                <td>{{ training.startDate | date ('Y-m-d h:i') }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    </body>
+{% endblock %}

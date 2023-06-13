@@ -1,10 +1,10 @@
 <header class="mt-4">
     <div class="container">
         <div class="row">
-            <div class="col-6">
+            <div class="col-9">
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <div class="container-fluid">
-                        <a class="navbar-brand me-5" href="">LOGO</a>
+                        <a class="navbar-brand me-5" href=""><img src="/assets/images/logo.png"> </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
@@ -22,14 +22,17 @@
                                     <a class="nav-link {% if app.request.pathInfo == path('app_tutor_request_received') or app.request.pathInfo == path('app_tutor_request_sended') %}active{% endif %}" href="{{ path('app_tutor_request_received') }}">Peticiones</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="be-tutor-ofertas-publicadas.html">Ofertas publicadas</a>
+                                    <a class="nav-link {% if app.request.pathInfo == path('app_show_trainings') or app.request.pathInfo == path('app_show_trainings') %}active{% endif %}" href="{{ path('app_show_trainings') }}">Formaciones</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " href="be-tutor-ofertas-publicadas.html">Ofertas publicadas</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
             </div>
-            <div class="col-6 d-flex justify-content-end align-items-center">
+            <div class="col-3 d-flex justify-content-end align-items-center">
                 <p class="m-0">{{ app.user.name }}</p>
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown"
